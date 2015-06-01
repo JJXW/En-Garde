@@ -29,26 +29,26 @@ public class FencerControllerScript : MonoBehaviour {
 //		float move = Input.GetAxis ("Horizontal");
 //		GetComponent<Rigidbody2D>().velocity = new Vector2 (move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
-		KeyCode lastKey=KeyCode.None;
-		if(Input.GetKeyDown (KeyCode.LeftArrow))
-		{
-			if(Input.GetKeyDown (KeyCode.LeftArrow) && lastKey != KeyCode.LeftArrow)
-			{
-				transform.Translate (Vector2.right * -maxSpeed * Time.deltaTime);
-			}
-			lastKey = KeyCode.LeftArrow;
-		}
-		else if(Input.GetKeyDown (KeyCode.RightArrow))
-		{
-			if(Input.GetKeyDown (KeyCode.RightArrow) && lastKey != KeyCode.RightArrow)
-			{
-				transform.Translate (Vector2.right * maxSpeed * Time.deltaTime);
-			}
-			lastKey = KeyCode.RightArrow;
-		}
+		KeyCode lastKey = KeyCode.None;
 
-
+		if (!this.anim.GetCurrentAnimatorStateInfo (0).IsName ("fencer_lunge")) {
+			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+				if (Input.GetKeyDown (KeyCode.LeftArrow) && lastKey != KeyCode.LeftArrow) {
+					transform.Translate (Vector2.right * -maxSpeed * Time.deltaTime);
+				}
+				lastKey = KeyCode.LeftArrow;
+			} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+				if (Input.GetKeyDown (KeyCode.RightArrow) && lastKey != KeyCode.RightArrow) {
+					transform.Translate (Vector2.right * maxSpeed * Time.deltaTime);
+				}
+				lastKey = KeyCode.RightArrow;
+			}
+		}
 	}
+
+
+
+
 
 	void Lunge()
 	{
@@ -57,6 +57,7 @@ public class FencerControllerScript : MonoBehaviour {
 		} else {
 			lunge = false;
 		}
+
 
 		anim.SetBool ("LungeButton", lunge);
 
