@@ -7,6 +7,7 @@ public class FencerControllerScript : MonoBehaviour {
 	public float maxSpeed = 20f; 
 	bool facingRight = false;
 	bool lunge = false;
+	bool advance = false;
 
 	Animator anim;
 
@@ -35,6 +36,7 @@ public class FencerControllerScript : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 				if (Input.GetKeyDown (KeyCode.LeftArrow) && lastKey != KeyCode.LeftArrow) {
 					transform.Translate (Vector2.right * -maxSpeed * Time.deltaTime);
+					advance = true;
 				}
 				lastKey = KeyCode.LeftArrow;
 			} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
@@ -42,8 +44,12 @@ public class FencerControllerScript : MonoBehaviour {
 					transform.Translate (Vector2.right * maxSpeed * Time.deltaTime);
 				}
 				lastKey = KeyCode.RightArrow;
+			} else {
+				advance = false;
 			}
 		}
+
+		anim.SetBool ("AdvanceButton", advance);
 	}
 
 
